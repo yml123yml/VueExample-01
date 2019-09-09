@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue修饰符</title>
+    <style>
+        .inner{
+            width: 200px;
+            background: cyan;
+        }
+        .outer{
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="inner" @click.capture="divClick">
+        <input class="outer" type="button" value="按钮" @click.stop="btnClick">
+        <a href="http://www.baidu.com" @click.prevent.stop="aClick">百度一下</a>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    //创建vue实例
+    var vm = new Vue({
+        el: '#app',
+        data:{
+
+        },
+        methods:{
+            btnClick(){
+                alert("触发按钮点击事件");
+            },
+            divClick(){
+                alert("div");
+            },
+            aClick(){
+                alert("a");
+            }
+        }
+    });
+
+</script>
+</html>
