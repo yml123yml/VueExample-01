@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue跑马灯</title>
+   
+</head>
+<body>
+    <div id="app">
+        <p>{{info}}</p>
+        <input type="button" value="开始" v-on:click="go">
+        <input type="button" value="结束" v-on:click="stop">
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',         //el 指定要控制的区域
+        data: {             //data 是个对象，指定了控制的区域内要用到的数据
+            info: '敌军还有五秒钟抵达战场~~~',
+            status: null
+        },
+        methods: {      //methods 可以自定义了方法
+            go() {
+                // 如果当前有定时器在运行，则直接return
+                if (this.status != null) {
+                    return;
+                }
+                // 开始定时器
+                this.status = setInterval(() => {
+                    this.info = this.info.substring(1) + this.info.substring(0, 1);//substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+                }, 200);
+            },
+            stop() {
+                clearInterval(this.status);
+            }
+        }
+    });
+
+</script>
+</html>
