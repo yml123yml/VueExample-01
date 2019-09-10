@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-遍历对象</title>
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-for="(val,key) in user">{{key}}-----{{val}}</p>
+        <!-- 注意：在遍历对象的键值对的时候，除了有val key。还有一个小标索引在第三个位置放 -->
+        <p v-for="(val,key,i) in user">{{key}}-----{{val}}-----索引：{{i}}</p>
+        <!-- 如果v-for遍历的是数字，i是从1开始的 -->
+        <p v-for="i in 10">第{{i}}个</p>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            user:{
+                id:01,
+                name:'张三',
+                age:20,
+                sex:'男'
+            }
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>

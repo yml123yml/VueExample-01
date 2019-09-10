@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-class样式</title>
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 数组中的元素，笨的方法输出 -->
+        <!-- 
+            <p>{{ list[0] }}</p>
+            <p>{{ list[1] }}</p>
+            <p>{{ list[2] }}</p>
+            <p>{{ list[3] }}</p>
+            <p>{{ list[4] }}</p>
+            <p>{{ list[5] }}</p> 
+        -->
+        <!-- 使用v-for方式 遍历数组 -->
+        <p v-for="item in list">{{ item }}</p>
+        <!-- item,i 值在前，键在后 -->
+        <p v-for="(item,i) in list">索引值：{{ item }}------下标值:{{ i }}</p>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            list:['刘备','曹操','赵云','张飞','关羽']
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>
