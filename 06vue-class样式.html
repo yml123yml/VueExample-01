@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-class样式</title>
+    <style>
+        .red {
+            color: red;
+        }
+        /*字体粗细*/
+        .thin {
+            font-weight: 100;
+        }
+        /*斜体*/
+        .italic {
+            font-style: italic;
+        }
+        /*字符间距*/
+        .active {
+            letter-spacing: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 class="red thin italic active">一般的css样式</h1>
+        <!-- 直接传递一个数组，="[''],[''],...." -->
+        <h2 :class="['red','italic']">vue数组--控制的class样式</h2>
+        <!-- 三元表达式 -->
+        <h2 :class="['red','thin',isactive ? 'italic' : '']">vue三目运算符--控制的class样式</h2>
+        <!-- 用对象的方式代替了三元表达式 -->
+        <h2 :class="['red','thin',{'italic':isitalic}]">用对象的方式代替了三元表达式--控制的class样式</h2>
+        <!-- 全部用对象的方式代替 -->
+        <h2 :class="[{'red':true},{'thin':false},{'italic':true}]">全部用对象的方式代替--控制的class样式</h2>
+        <!-- 引用vue中data数据参数作为class参数 -->
+        <h2 :class="classObj">vue中data数据参数作为class参数--控制的class样式</h2>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            isactive:true,
+            classObj:{
+                red:true,
+                thin:false,
+                italic:true
+            },
+            msg:'哈哈哈'
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-class样式</title>
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+       <h1 style="color:red;">一般style样式的写法</h1>
+       <!-- 内联样式：对象是无序键值对集合 -->
+       <h1 :style="{'color':'red','font-weight':'100'}">vue--style样式的写法</h1>
+       <!-- 优化 引用对象 -->
+       <h1 :style="styleObj1">vue中data--style样式的写法</h1>
+       <!-- 引用多个对象 使用对象数组 -->
+       <h1 :style="[styleObj1,styleObj2]">vue中data引用多个对象 使用对象数组--style样式的写法</h1>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            styleObj1:{'color':'red','font-weight':'100', 'background':'yello'},
+            styleObj2:{'font-style':'italic'}
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>
