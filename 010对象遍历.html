@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-遍历对象</title>
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <label>ID:
+                <input type="text" v-model="id">
+            </label>
+            <label>Name:
+                <input type="text" v-model="name">
+            </label>
+            <input type="button" value="添加" @click="add">
+        </div>
+        <p v-for="item in list" v-bind:key="item.id">
+        <!-- 
+            如果加v-bind:key="item.id"的话，选中的会跟着复选框走，
+            没有的话 不跟着 
+        -->
+            <input type="checkbox">{{item.id}}----{{item.name}}
+        </p>
+
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            list:[
+                {id:1,name:'孙悟空'},
+                {id:2,name:'猪八戒'},
+                {id:3,name:'沙僧'},
+                {id:4,name:'唐僧'}
+            ]
+        },
+        methods:{
+            add(){
+                //unshift 添加到前面
+                //push 追加到后面
+                this.list.push({id:this.id,name:this.name});
+
+            }
+        }
+    });
+</script>
+</html>
