@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ msg | msgFilter('品品')}}</p>
+    </div>
+    
+</body>
+<script type="text/javascript">
+    //创建过滤器 参数(过滤器名，过滤器方法)
+    Vue.filter('msgFilter',function(msg,arg){
+        return msg.replace(/赏/g,arg);///赏/g-----同时修改多个，不写只修改一个
+    });
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'赏花，赏月，赏秋香'
+        },
+        methods:{
+
+        }
+    });
+</script>
+</html>
