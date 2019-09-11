@@ -21,13 +21,13 @@
                 </label>
                 <label>
                     Name:
-                    <input type="text" class="form-control" v-model="name">
+                    <input type="text" class="form-control" v-model="name" v-on:keyup.enter="add">
                 </label>
                 <!-- 在Vue中，使用事件绑定机制，为元素指定处理函数的时候，如果加了小括号，就可以给函数传参了 -->
                 <input type="button" value="添加" class="btn btn-primary" @click="add()">
                 <label>
                     搜索名称关键字：
-                    <input type="text" class="form-control" v-model="keywords">
+                    <input type="text" class="form-control" v-model="keywords" v-focus>
                 </label>
             </div>
         </div>
@@ -57,6 +57,21 @@
     </div>
 </body>
 <script>
+    Vue.directive('focus',{
+        bind:function (el){
+            //当自定义的指令绑定到元素的时候，执行bind函数，而且只执行一次，相当于初始化
+            //el元素，此阶段为绑定阶段，还没有将元素插入DOM中
+           
+        },
+        inserted:function(el){
+            //插入到DOM的时候，执行此函数，执行一次
+            el.focus();//获取焦点的方法必须在元素已经插入到DOM中后才可执行,因此此方法要放在音色特点阶段，而不是bind阶段
+        },
+        update:function(){
+            //更新时执行此函数，可执行多次
+        }
+    });
+
     //全局的过滤器，进行时间的格式化
     Vue.filter('dateFormat',function (dateStr) {
         //根据给定的时间字符串，得到特定的时间
@@ -88,7 +103,7 @@
         methods:{
             //添加的方法
             add(){
-                var car = {id:this.id,name:this.name,ctime:this.ctime};
+                var car = {id:this.id,name:this.name,ctime:new Date()};
                 this.list.push(car);
                 this.id = this.name = '';//清空输入框
             },
@@ -111,5 +126,8 @@
             }
         }
     });
+
+//自定义
+
 </script>
 </html>
