@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>Vue-Document</title>
+</head>
+<body>
+  <div  id='app'>
+    <input type="button" value="get请求" @click="getInfo">
+    <input type="button" value="post请求" @click="postInfo"> 
+    <input type="button" value="jsonp请求" @click="jsonpInfo">
+  </div>
+ 
+</body>
+<script src='js/vue.js'></script>
+<script src="js/vue-resource-1.3.4.js"></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg:'new vue word'
+    },
+    methods: {
+        getInfo(){
+            this.$http.get('http://www.liulongbin.top:3005/api/getnewslist')
+            .then(function(result){
+                console.log(result.body.message[0]);
+            });
+        },
+
+        postInfo(){
+            this.$http.post('http://www.liulongbin.top:3005/api/postcomment/:artid')
+            .then(function(result){
+                console.log(result.body);
+            });
+        },
+
+        jsonpInfo(){
+            this.$http.jsonp('http://apis.juhe.cn/cook/query?key=&menu=%E8%A5%BF%E7%BA%A2%E6%9F%BF&rn=10&pn=3')
+            .then(function(result){
+                console.log(result.body);
+            });
+        }
+
+    }
+ });
+</script>
+</html>
