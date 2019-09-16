@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>Vue-生命周期</title>
+</head>
+<body>
+  <div  id='app'>
+    <h1>{{ msg  }}</h1>
+  </div>
+ 
+</body>
+<script src='js/vue.js'></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg:'new vue word'
+    },
+    methods: {
+      show(){
+        console.log('show.....');
+      }
+    },
+    beforeCreate(){
+      //生命周期的第一步,此函数调用不到data和methos数据
+      // console.log(this.msg);
+      // this.show();
+    },
+    created(){
+      //生命周期的第二步，data数据和methods数据都能读取
+      // console.log(this.msg);
+      // this.show();
+    },
+    beforeMount(){
+      //生命周期的第三步 模板已经编辑在内存中，但是没有在页面中渲染
+      //此时页面中的数据和内存中的数据不一致
+      // console.log(this.msg);
+      // this.show();
+      // console.log(document.getElementById('h1').innerHTML);
+    },
+    mounted(){
+      //生命周期的第四步  此阶段表示 内存中的模板已经真实的反映到了页面上，也就是在内存中的数据已经完全挂载到了DOM中
+      //此时页面中的数据和内存中的数据一致
+      // console.log(this.msg);
+      // this.show();
+      // console.log(document.getElementById('h1').innerHTML);
+    },
+    beforeUpdate(){
+      //生命周期的第五步 此阶段数据没有更新到页面中
+      console.log('更改：'+document.getElementById('h1').innerText);
+      consol.log(this.msg);
+    },
+    updated(){
+      //生命周期的第六步 此阶段数据更新到页面中  同步
+      // console.log( document.getElementById('h1').innerText +'!!!' )
+      // console.log(this.msg);
+    }
+ });
+</script>
+</html>
