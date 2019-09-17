@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Vue-Document</title>
+  <!-- 引入第三方的动画 -->
+  <link rel="stylesheet" href="css/animate.css">
+  <style>
+    .animated {
+      animation-duration: 45s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    <input type="button" value="button" @click="flag = !flag">
+    <!-- 调用 -->
+    <!-- <transition enter-active-class='animated bounceIn' leave-active-class='animated bounceOut' >
+        <h2 v-if='flag' >这是H2标签</h2>
+    </transition> -->
+    <transition enter-active-class='bounceIn' leave-active-class='bounceOut' :duration='{enter:1000,leave:2000}'>
+      <!-- //其中duration是绑定动画的时间 -->
+      <h3 v-if='flag' class='animated'>这里是动画的内容</h3>
+    </transition>
+    <transition duration="{enter:5000,leave:5000}" enter-active-class="animated jello"
+      leave-active-class="animated shake">
+      <div v-if="flag">hello</div>
+    </transition>
+  </div>
+
+
+
+</body>
+<script src='js/vue.js'></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true
+    }
+  });
+</script>
+
+</html>

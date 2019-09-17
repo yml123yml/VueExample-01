@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>Vue-Document</title>
+<style>
+    .v-enter,
+    .v-leave-to {
+        opacity: 0;
+        transform: translateX(150px);
+        color: rgb(255, 0, 0);
+    }
+    .v-enter-active,
+    .v-leave-active {
+        transition: all 3s ease;
+    }
+</style>
+</head>
+<body>
+  <div  id='app'>
+    <input type="button" value="按钮" @click="flag = !flag"> 
+    <!-- 
+        第一步：先使用transition标签要把过渡的元素包裹起来
+        注：此标签为vue官方提供 
+    -->
+    <transition>
+        <h1 v-if="flag">点击按钮显示或隐藏我</h1>
+    </transition>
+    
+  </div>
+ 
+</body>
+<script src='js/vue.js'></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      flag: true
+    },
+    methods: {
+    
+    }
+ });
+</script>
+</html>
