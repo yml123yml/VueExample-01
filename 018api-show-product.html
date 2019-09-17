@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>商品列表</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">商品展示</h3>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>add_time</th>
+                    <th>zhaiyao</th>
+                    <th>img</th>
+                    <th>click</th>
+                    <th>sell_price</th>
+                    <th>market_price</th>
+                    <th>stock_quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.add_time }}</td>
+                    <td>{{ item.zhaiyao }}</td>
+                    <td><img :src="item.img_url" style="width: 80px;height:80px"></td>
+                    <td>{{ item.click }}</td>
+                    <td>{{ item.sell_price }}</td>
+                    <td>{{ item.market_price }}</td>
+                    <td>{{ item.stock_quantity }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+</body>
+<script src='js/vue.js'></script>
+<script src="js/vue-resource-1.3.4.js"></script>
+<script>
+    //http全局配置，全局的请求数据接口
+    Vue.http.options.root = 'http://www.liulongbin.top:3005/';  
+    Vue.http.options.emulateJSON = true;
+    var vm = new Vue({
+        el: '#app',
+        data: {
+          list:[] //存放新闻的数组
+        },
+    //生命周期函数
+    created(){
+       this.getlist();
+    },
+    methods: {
+        //获取商品列表
+        getlist(){
+            this.$http.get('api/getgoods?pageindex=1')
+            .then(result =>{
+                
+                if(result.body.status === 0){
+                    this.list = result.body.message;
+                }else{
+                    alert("获取商品列表失败");
+                }
+            });
+
+        }
+       
+    }
+ });
+</script>
+</html>

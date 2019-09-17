@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>新闻</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">新闻资讯</h3>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>add_time</th>
+                    <th>zhaiyao</th>
+                    <th>click</th>
+                    <th>img</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.add_time |dateFormat }}</td>
+                    <td>{{ item.zhaiyao }}</td>
+                    <td>{{ item.click }}次</td>                   
+                    <td><img :src="item.img_url" style="width: 80px;height:80px"></td>
+                    <td>
+                        
+                        <a href="" @click.prevent="detail('api/getnew/'+item.id)">详情</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+ 
+</body>
+<script src='js/vue.js'></script>
+<script src="js/vue-resource-1.3.4.js"></script>
+<script>
+     //全局的过滤器，进行时间的格式化
+     Vue.filter('dateFormat',function (dateStr) {
+        //根据给定的时间字符串，得到特定的时间
+        var dt = new Date(dateStr);
+        var y = dt.getFullYear();
+        var m = dt.getMonth()+1;
+        var d = dt.getDate();
+        var hh = dt.getHours();
+        var mm = dt.getMinutes();
+        var ss = dt.getSeconds();
+        return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+        //vue 有一种拼接字符串的规范写法
+        //键盘 Tab 键 上边的键  英文输入状态  然后采用类似EL表达式${变量}
+        //return `${}:${}:${}`
+
+    });
+
+    //http全局配置，全局的请求数据接口
+    Vue.http.options.root = 'http://www.liulongbin.top:3005/';  
+    Vue.http.options.emulateJSON = true;
+    var vm = new Vue({
+        el: '#app',
+        data: {
+          list:[] //存放新闻的数组
+        },
+    //生命周期函数
+    created(){
+       this.getlist();
+    },
+    methods: {
+        //获取图文资讯列表
+        getlist(){
+            this.$http.get('api/getnewslist')
+            .then(result =>{
+                
+                if(result.body.status === 0){
+                    this.list = result.body.message;
+                }else{
+                    alert("获取商品列表失败");
+                }
+            });
+
+        },
+        //获取图文资讯详情
+        detail(id){
+            this.$http.get('api/getnew/' + id)
+            .then(result =>{
+                // if(result.body.status === 0){
+                //     this.list = result.body.message;
+                // }else{
+                //     alert("获取详情失败");
+                // }
+                
+            });
+        }
+    }
+ });
+</script>
+</html>
