@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <title>Vue-Document</title>
+        <style>
+            ul {
+                list-style: none;
+            }
+            li {
+                border: 1px dashed #ff0;
+                padding: 5px;
+                width: 100%;
+            }
+            li:hover {
+                color: #f00;
+                background-color: rgb(171, 230, 235);   
+                transition: all 1s ease;/*鼠标移入的动画*/
+            }
+            /*第二步：设置两个时间点 两个时间段*/
+            .v-enter,v-leave-to {
+                opacity: 0;
+                transform: translateY(100px);/*鼠标删除/添加的动画*/
+            }
+            .v-enter-active,.v-leave-active {
+                transition: 0.8s all ease;/*鼠标删除/添加的动画*/
+            }
+            .v-move {
+                /*删除时候，实现下面的item缓缓地上移  .v-leave-active  absolute需要配合使用*/
+                transition: all 0.8s ease;
+            }
+            .v-leave-active {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div  id='app'>
+            <div>
+                <label>
+                    ID:
+                    <input type="text" v-model="id">
+                </label>
+                <label>
+                    Name:
+                    <input type="text" v-model="name">
+                </label>
+                <input type="button" value="添加" @click="add">
+            </div>
+            <ul>
+                <transition-group>
+                    <li v-for="(item,i) in list" :key="item.id" @click="del(i)">
+                        {{ item.id }}----------{{ item.name }}
+                    </li> 
+                </transition-group>
+                
+            </ul>
+        </div>
+   
+    </body>
+    <script src='js/vue.js'></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id:'',
+                name:'',
+                list:[
+                    {
+                        id:1,
+                        name:"张三"
+                    },
+                    {
+                        id:2,
+                        name:"李四"
+                    },
+                    {
+                        id:3,
+                        name:"张飞"
+                    },
+                    {
+                        id:4,
+                        name:"吕布"
+                    }
+                ]
+        },
+        methods: {
+            add(){
+                this.list.push({id:this.id,name:this.name});
+                this.id = ''
+                this.name = ""
+            },
+            del(i){
+                this.list.splice(i,1);//删除
+            }
+        }
+    });
+    </script>
+</html>

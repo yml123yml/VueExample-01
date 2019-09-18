@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <title>Vue-Document</title>
+    </head>
+    <body>
+        <div  id='app'>
+           <!-- 第二步：引用vue组件 -->
+           <myname>
+
+           </myname>
+        </div>
+   
+    </body>
+    <script src='js/vue.js'></script>
+    <script>
+    /*
+        //第一步：创建vue组件 1.1 Vue.extend方式创建组件
+        var coml = Vue.extend({
+            template:'<h1>使用Vue.extend创建组件</h1>'
+        });
+        //1.2使用component方式结合给组件
+        Vue.component('myname',coml);
+    */
+    
+        //上述方法的简便写法 
+        Vue.component('myname',{
+            template:'<h1>使用Vue.extend创建组件</h1>'
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+            
+            },
+            methods: {
+            
+            }
+        });
+    </script>
+</html>

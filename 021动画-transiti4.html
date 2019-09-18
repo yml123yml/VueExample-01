@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <title>Vue-Document</title>
+        <style>
+            p {
+                margin-left: 500px;
+                color: brown;
+                opacity: 1;
+            }
+            .shop {
+                width: 100px;
+                height: 100px;
+                border: 2px solid red;
+                border-radius: 50%;
+                margin-top: 70px;
+            }
+        </style>
+    </head>
+    <body>
+        <div  id='app'>
+            <p>购物车</p>
+            <input type="button" value="加入购物车" @click="flag = !flag">
+            <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+                <div class="shop" v-if="flag"></div>
+            </transition>
+            
+        </div>
+   
+    </body>
+    <script src='js/vue.js'></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag:false
+            },
+            methods: {
+                //beforeEnter设置动画开始之前，起始位置，起始状态
+                beforeEnter(el){//参数el，表示要执行的动画是哪个元素 相当于js中调用DOM
+                    el.style.transform = "translate(0,0)";
+                    el.style.opacity = "1";
+                },
+                //当动画运行时
+                enter(el,done){
+                    el.offsetWidth;//强制动画刷新
+                    el.style.transform = "translate(500px,-20px)";
+                    el.style.transition = "all 1s ease";
+                    el.style.opacity = "0";
+                    done();//相当于引入after-enter钩子函数
+                },
+                //
+                afterEnter(el){
+                    this.flag = !this.flag;
+                }
+            }
+    });
+    </script>
+</html>

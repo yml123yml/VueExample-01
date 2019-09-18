@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+        <title>定义组件</title>
+    </head>
+    <body>
+        <div id='app'>
+            <!-- 第三步：引用vue组件 标签名为Vue.component的第一个参数 -->
+            <myname></myname>
+        </div>
+        <!-- 第一步：在HTML中编写template组件内容 -->
+        <template id="tem1">
+            <div>
+                <h1>通过template元素定义外部结构</h1>
+                <h2>被Vue.component所引用</h2>
+            </div>
+        </template>  
+    </body>
+    <script src='js/vue.js'></script>
+    <script>
+        //第二步： 第一个参数：组件名称，第二个参数：引入template id 创建组件
+        Vue.component("myname",{
+            template:'#tem1'
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               msg:'new vue word'
+            },
+            methods: {
+               
+            }
+        });
+    </script>
+</html>
